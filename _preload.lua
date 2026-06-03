@@ -260,3 +260,17 @@ function common:hasSharedLib(lib, searchPaths)
 	end
 	return false
 end
+
+if type(flags) ~= "function" then
+	function flags(flag)
+		if type(flag) == "table" then
+			for _, v in ipairs(flag) do
+				flags(v)
+			end
+			return
+		end
+		if flag == "MultiProcessorCompile" then
+			multiprocessorcompile("On")
+		end
+	end
+end
